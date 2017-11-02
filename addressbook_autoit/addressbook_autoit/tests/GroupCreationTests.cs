@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 
 
-namespace addressbook_tests_autoit
+namespace addressbook_autoit
 {
     [TestFixture]
     public class GroupCreationTests : TestBase

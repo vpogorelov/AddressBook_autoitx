@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AutoItX3Lib;
 
-namespace addressbook_tests_autoit
+namespace addressbook_autoit
 {
     public class HelperBase
     {

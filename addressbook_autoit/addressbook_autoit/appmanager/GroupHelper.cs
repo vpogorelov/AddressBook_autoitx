@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace addressbook_tests_autoit
+namespace addressbook_autoit
 {
     public class GroupHelper : HelperBase
     {
@@ -20,7 +20,7 @@ namespace addressbook_tests_autoit
             for (int i = 0; i < int.Parse(count); i++)
             {
                 string item = aux.ControlTreeView(GROUPWINTITLE, "",
-                  "WindowsForms10.SysTreeView32.app.0.2c908d51", "GetText", "#0|#" + i, "");
+                    "WindowsForms10.SysTreeView32.app.0.2c908d51", "GetText", "#0|#" + i, "");
                 list.Add(new GroupData()
                 {
                     Name = item
@@ -39,6 +39,25 @@ namespace addressbook_tests_autoit
             CloseGroupsdDalogue();
         }
 
+        internal void Remove(GroupData toBeRemoved)
+        {
+            OpenGroupsdDalogue();
+            int index = 0;
+
+            while (aux.ControlTreeView(GROUPWINTITLE, "",
+                "WindowsForms10.SysTreeView32.app.0.2c908d51",
+                "GetText", "#0|#" + index, "") != toBeRemoved.Name)
+                index++;
+
+            aux.ControlTreeView(GROUPWINTITLE, "",
+                "WindowsForms10.SysTreeView32.app.0.2c908d51", "Select", "#0|#"+index, "");
+            aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d51");  // buttom 'Delete'
+            //                  ИЛИ              aux.Send("{DELETE}");
+            aux.Send("{ENTER}");
+
+            CloseGroupsdDalogue();
+        }
+
         private void CloseGroupsdDalogue()
         {
             aux.ControlClick(GROUPWINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d54");
@@ -49,5 +68,7 @@ namespace addressbook_tests_autoit
             aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d512");
             aux.WinWait(GROUPWINTITLE);
         }
+
+
     }
 }
